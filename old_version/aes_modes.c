@@ -87,25 +87,20 @@ int main(void)
             case 1: // ECB mode
                 gettimeofday(&time_3, NULL); // START OF ENCRYPTION
                 aes_encrypt_ecb(message, length_of_message, ciphertext, key_schedule, keysize);
-                
-                #ifdef DEBUG
-                    printf("\nmessage: ");
-                    print_hex(message, length_of_message);
-                    printf("\nencryption: ");
-                    print_hex(ciphertext, length_of_message);
-                #endif
-
                 gettimeofday(&time_4, NULL); // END OF ENCRYPTION and START OF DECRYPTION
                 aes_decrypt_ecb(ciphertext, length_of_message, enc_buf, key_schedule, keysize);
+                gettimeofday(&time_5, NULL); // END OF DECRYPTION
 
                 #ifdef DEBUG
-                    printf("\nciphertext: ");
+                    printf("\nECB MODE - ON");
+                    printf("\nMessage: ");
+                    print_hex(message, length_of_message);
+                    printf("\n\nCiphertext: ");
                     print_hex(ciphertext, length_of_message);
-                    printf("\ndecryption: ");
+                    printf("\n\nDecryption: ");
                     print_hex(enc_buf, length_of_message);
                 #endif
 
-                gettimeofday(&time_5, NULL); // END OF DECRYPTION
                 break;
 
             case 2: // CBC mode
@@ -114,25 +109,20 @@ int main(void)
                 }
                 gettimeofday(&time_3, NULL); // START OF ENCRYPTION                
                 aes_encrypt_cbc(message, length_of_message, ciphertext, key_schedule, keysize, initialize_vector);
-                
-                #ifdef DEBUG
-                    printf("\nmessage: ");
-                    print_hex(message, length_of_message);
-                    printf("\nencryption: ");
-                    print_hex(ciphertext, length_of_message);
-                #endif
-
                 gettimeofday(&time_4, NULL); // END OF ENCRYPTION and START OF DECRYPTION
                 aes_decrypt_cbc(ciphertext, length_of_message, enc_buf, key_schedule, keysize, initialize_vector);
+                gettimeofday(&time_5, NULL); // END OF DECRYPTION
                 
                 #ifdef DEBUG
-                    printf("\nciphertext: ");
+                    printf("\nCBC MODE - ON");
+                    printf("\nMessage: ");
+                    print_hex(message, length_of_message);
+                    printf("\n\nCiphertext: ");
                     print_hex(ciphertext, length_of_message);
-                    printf("\ndecryption: ");
+                    printf("\n\nDecryption: ");
                     print_hex(enc_buf, length_of_message);
                 #endif
 
-                gettimeofday(&time_5, NULL); // END OF DECRYPTION
                 break;
 
             case 3: // PCBC mode
@@ -141,25 +131,20 @@ int main(void)
                 }         
                 gettimeofday(&time_3, NULL); // START OF ENCRYPTION
                 aes_encrypt_pcbc(message, length_of_message, ciphertext, key_schedule, keysize, initialize_vector);
-
-                #ifdef DEBUG
-                    printf("\nmessage: ");
-                    print_hex(message, length_of_message);
-                    printf("\nencryption: ");
-                    print_hex(ciphertext, length_of_message);
-                #endif
-
                 gettimeofday(&time_4, NULL); // END OF ENCRYPTION and START OF DECRYPTION
                 aes_decrypt_pcbc(ciphertext, length_of_message, enc_buf, key_schedule, keysize, initialize_vector);
-
+                gettimeofday(&time_5, NULL); // END OF DECRYPTION
+                
                 #ifdef DEBUG
-                    printf("\nciphertext: ");
+                    printf("\nECB MODE - ON");
+                    printf("\nMessage: ");
+                    print_hex(message, length_of_message);
+                    printf("\n\nCiphertext: ");
                     print_hex(ciphertext, length_of_message);
-                    printf("\ndecryption: ");
+                    printf("\n\nDecryption: ");
                     print_hex(enc_buf, length_of_message);
                 #endif
 
-                gettimeofday(&time_5, NULL); // END OF DECRYPTION
                 break;
 
             case 4: // CFB mode
@@ -168,25 +153,20 @@ int main(void)
                 }  
                 gettimeofday(&time_3, NULL); // START OF ENCRYPTION
                 aes_encrypt_cfb(message, length_of_message, ciphertext, key_schedule, keysize, initialize_vector);
-                
-                #ifdef DEBUG
-                    printf("\nmessage: ");
-                    print_hex(message, length_of_message);
-                    printf("\nencryption: ");
-                    print_hex(ciphertext, length_of_message);
-                #endif
-
                 gettimeofday(&time_4, NULL); // END OF ENCRYPTION and START OF DECRYPTION
-                aes_decrypt_cfb(ciphertext, length_of_message, enc_buf, key_schedule, keysize, initialize_vector);
+                aes_decrypt_cfb(ciphertext, length_of_message, enc_buf, key_schedule, keysize, initialize_vector);                
+                gettimeofday(&time_5, NULL); // END OF DECRYPTION
                 
                 #ifdef DEBUG
-                    printf("\nciphertext: ");
+                    printf("\nCFB MODE - ON");
+                    printf("\nMessage: ");
+                    print_hex(message, length_of_message);
+                    printf("\n\nCiphertext: ");
                     print_hex(ciphertext, length_of_message);
-                    printf("\ndecryption: ");
+                    printf("\n\nDecryption: ");
                     print_hex(enc_buf, length_of_message);
                 #endif
 
-                gettimeofday(&time_5, NULL); // END OF DECRYPTION
                 break;
 
             case 5: // OFB mode
@@ -195,25 +175,20 @@ int main(void)
                 }         
                 gettimeofday(&time_3, NULL); // START OF ENCRYPTION
                 aes_encrypt_ofb(message, length_of_message, ciphertext, key_schedule, keysize, initialize_vector);
-                
-                #ifdef DEBUG
-                    printf("\nmessage: ");
-                    print_hex(message, length_of_message);
-                    printf("\nencryption: ");
-                    print_hex(ciphertext, length_of_message);
-                #endif
-
                 gettimeofday(&time_4, NULL); // END OF ENCRYPTION and START OF DECRYPTION
                 aes_decrypt_ofb(ciphertext, length_of_message, enc_buf, key_schedule, keysize, initialize_vector);
+                gettimeofday(&time_5, NULL); // END OF DECRYPTION
                 
                 #ifdef DEBUG
-                    printf("\nciphertext: ");
+                    printf("\nOFB MODE - ON");
+                    printf("\nMessage: ");
+                    print_hex(message, length_of_message);
+                    printf("\n\nCiphertext: ");
                     print_hex(ciphertext, length_of_message);
-                    printf("\ndecryption: ");
+                    printf("\n\nDecryption: ");
                     print_hex(enc_buf, length_of_message);
                 #endif
 
-                gettimeofday(&time_5, NULL); // END OF DECRYPTION
                 break;      
 
             case 6: // CTR mode
@@ -222,25 +197,20 @@ int main(void)
                 }
                 gettimeofday(&time_3, NULL); // START OF ENCRYPTION   
                 aes_encrypt_ctr(message, length_of_message, ciphertext, key_schedule, keysize, initialize_vector);
-                
-                #ifdef DEBUG
-                    printf("\nmessage: ");
-                    print_hex(message, length_of_message);
-                    printf("\nencryption: ");
-                    print_hex(ciphertext, length_of_message);
-                #endif
-
                 gettimeofday(&time_4, NULL); // END OF ENCRYPTION and START OF DECRYPTION
                 aes_decrypt_ctr(ciphertext, length_of_message, enc_buf, key_schedule, keysize, initialize_vector);
+                gettimeofday(&time_5, NULL); // END OF DECRYPTION
                 
                 #ifdef DEBUG
-                    printf("\nciphertext: ");
+                    printf("\nCTR MODE - ON");
+                    printf("\nMessage: ");
+                    print_hex(message, length_of_message);
+                    printf("\n\nCiphertext: ");
                     print_hex(ciphertext, length_of_message);
-                    printf("\ndecryption: ");
+                    printf("\n\nDecryption: ");
                     print_hex(enc_buf, length_of_message);
                 #endif
 
-                gettimeofday(&time_5, NULL); // END OF DECRYPTION
                 break;
 
             default:
@@ -264,6 +234,7 @@ int main(void)
         encryption_total_time += encryption_times[k];
         decryption_total_time += decryption_times[k];
     }
+    
     double key_setup_mean_time = key_setup_total_time / NumOfExperiments;
     double encryption_mean_time = encryption_total_time / NumOfExperiments;
     double decryption_mean_time = decryption_total_time / NumOfExperiments;
@@ -289,8 +260,7 @@ int main(void)
 
     // CHECK THE RESULTS
     if (pass) printf("TESTS PASSED!!!\n");
-    else printf("TESTS FAILED(\n");
-    // printf("TESTS PASS: %d\n", pass);
+    else printf("TESTS FAILED :(\n");
 
     free(message);
     free(ciphertext);
@@ -300,6 +270,6 @@ int main(void)
     free(encryption_times);
     free(decryption_times);
     free(enc_buf);
-    
+
     return 0;
 }

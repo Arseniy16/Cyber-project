@@ -10,6 +10,17 @@
 typedef unsigned char BYTE;
 typedef unsigned int WORD;
 
+
+// for debug and print hex value
+void print_hex(BYTE str[], int len)
+{
+    int idx;
+
+    for(idx = 0; idx < len; idx++)
+        printf("%02x", str[idx]);
+
+    return;
+}
 /*********************** FUNCTION DECLARATIONS **********************/
 ///////////////////
 // AES
