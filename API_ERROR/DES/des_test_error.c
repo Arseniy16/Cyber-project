@@ -6,17 +6,17 @@
 #include <string.h>
 
 #include "des.h"
-// #define ".ap"
+#include "../api.h"
 
 // #define DEBUG
 // #define VERBOSE
 // #define MY
 
-#ifdef DEBUG
-    #define PRINT(str) printf("%s", str)
-#else 
-    #define PRINT(str)
-#endif 
+// #ifdef DEBUG
+//     #define PRINT(str) printf("%s", str)
+// #else 
+//     #define PRINT(str)
+// #endif 
 
 // for debug and print hex value
 // void print_hex(uint8_t str[], int len) {
@@ -381,10 +381,6 @@ int DES_test_error(unsigned long int number_of_blocks, int num_err, int user_cho
 
     error_estimation(result, NumOfExperiments, DES_results);
     printf("\n%sError: %lf +- %lf %%%s\n", KRED, DES_results->err_mean, DES_results->err_std, KWHT);
-
-    // ERROR DES_results;
-    // error_estimation(result, NumOfExperiments, &DES_results);
-    // printf("\n%sError: %lf +- %lf %%%s\n", KRED, DES_results.err_mean, DES_results.err_std, KWHT);
 
     free(message);
     free(cyphertext);

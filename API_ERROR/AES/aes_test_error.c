@@ -6,6 +6,7 @@
 #include <string.h>
 
 #include "aes.h"
+#include "../api.h"
 
 // // #define DEBUG
 // // #define VERBOSE

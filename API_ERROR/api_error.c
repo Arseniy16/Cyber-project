@@ -4,9 +4,18 @@
 #include <memory.h>
 #include <math.h>
 #include <time.h>
-// #include "AES/aes.h"
-// #include "DES/des.h"
+#include "AES/aes.h"
+#include "DES/des.h"
 #include "api.h"
+
+// #define DEBUG
+// #define VERBOSE
+
+#ifdef DEBUG
+    #define PRINT(str) printf("%s", str)
+#else 
+    #define PRINT(str)
+#endif 
 
 // for debug and print hex value
 void print_hex(BYTE str[], int len) {

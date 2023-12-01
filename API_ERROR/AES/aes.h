@@ -3,7 +3,7 @@
 
 #include <stddef.h>
 #include <stdio.h>
-#include "../api.h"
+// #include "../api.h"
 /****************************** MACROS ******************************/
 #define AES_BLOCK_SIZE 16
 
@@ -32,7 +32,7 @@ typedef struct KPI {
 void xor_of_two_blocks_AES(BYTE* block_1, BYTE* block_2);
 void AES_time_performance(unsigned long int number_of_blocks, int option_key, int user_choice, int NumOfExperiments, KPI* AES_results);
 
-// int AES_test_error(unsigned long int number_of_blocks, int num_err, int option_key, int user_choice, int NumOfExperiments, ERROR* AES_results);
+int AES_test_error(unsigned long int number_of_blocks, int num_err, int option_key, int user_choice, int NumOfExperiments, ERROR* AES_results);
 
 /*********************** FUNCTION DECLARATIONS **********************/
 ///////////////////

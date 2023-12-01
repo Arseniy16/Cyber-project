@@ -30,7 +30,7 @@ size_t DES(uint8_t * to, uint8_t mode, uint64_t * keys48b, uint8_t * from, size_
 void DES_time_performance(unsigned long int number_of_blocks, int user_choice,
                           int NumOfExperiments, ERROR* DES_results);
 
-// int DES_test_error(unsigned long int number_of_blocks, int num_err, int user_choice, int NumOfExperiments, ERROR* DES_results);
+int DES_test_error(unsigned long int number_of_blocks, int num_err, int user_choice, int NumOfExperiments, ERROR* DES_results);
 
 void key_expansion(uint64_t key64b, uint64_t * keys48b);
 void key_permutation_56bits_to_28bits(uint64_t block56b, uint32_t * block32b_1, uint32_t * block32b_2);

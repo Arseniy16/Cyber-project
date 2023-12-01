@@ -19,9 +19,10 @@ typedef struct ERROR {
     double err_mean, err_std;
 } ERROR;
 
-int AES_test_error(unsigned long int number_of_blocks, int num_err, int option_key, int user_choice, int NumOfExperiments, ERROR* AES_results);
-int DES_test_error(unsigned long int number_of_blocks, int num_err, int user_choice, int NumOfExperiments, ERROR* DES_results);
+// int AES_test_error(unsigned long int number_of_blocks, int num_err, int option_key, int user_choice, int NumOfExperiments, ERROR* AES_results);
+// int DES_test_error(unsigned long int number_of_blocks, int num_err, int user_choice, int NumOfExperiments, ERROR* DES_results);
 
+// print 
 void print_hex(BYTE str[], int len);
 void print_hex_color(BYTE str[], int len, int* arr, int cnt_error);
 void print_debug(BYTE* message, BYTE* cyphertext, unsigned long int length_of_message);
