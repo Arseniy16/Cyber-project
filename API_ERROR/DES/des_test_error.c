@@ -6,53 +6,59 @@
 #include <string.h>
 
 #include "des.h"
-#include "../api.h"
+// #include "../api.h"
 
+/****************************** MACROS ******************************/
 // #define DEBUG
 // #define VERBOSE
 // #define MY
 
-// #ifdef DEBUG
-//     #define PRINT(str) printf("%s", str)
-// #else 
-//     #define PRINT(str)
-// #endif 
+#ifdef DEBUG
+    #define PRINT(str) printf("%s", str)
+#else 
+    #define PRINT(str)
+#endif 
+
+static unsigned long int sum_tests = 0;
+
+
+/*********************** FUNCTION DEFINITIONS **********************/
 
 // for debug and print hex value
-// void print_hex(uint8_t str[], int len) {
-//     int idx;
+void print_hex(uint8_t str[], int len) {
+    int idx;
 
-//     for(idx = 0; idx < len; idx++)
-//         printf("%02x", str[idx]);
+    for(idx = 0; idx < len; idx++)
+        printf("%02x", str[idx]);
 
-//     return;
-// }
+    return;
+}
 
-// void print_hex_color(uint8_t str[], int len, int* arr, int cnt_error) {
-//     int idx;
-//     int cnt = 0;
+void print_hex_color(uint8_t str[], int len, int* arr, int cnt_error) {
+    int idx;
+    int cnt = 0;
 
-//     for(idx = 0; idx < len; idx++) {
-//         if ((idx == arr[cnt]) && (cnt < cnt_error)) {
-//             printf("%s%02x%s", KYEL, str[idx], KWHT); 
-//             cnt++;
-//         }
-//         else printf("%02x", str[idx]);
-//     }
+    for(idx = 0; idx < len; idx++) {
+        if ((idx == arr[cnt]) && (cnt < cnt_error)) {
+            printf("%s%02x%s", KYEL, str[idx], KWHT); 
+            cnt++;
+        }
+        else printf("%02x", str[idx]);
+    }
 
-//     return;
-// }
+    return;
+}
 
-// void print_debug(uint8_t* message, uint8_t* cyphertext, unsigned long int length_of_message) {
-//     #ifdef DEBUG
-//         printf("\nMessage: ");
-//         print_hex(message, length_of_message);
-//         printf("\n\nEncryption: ");
-//         print_hex(cyphertext, length_of_message);
-//     #endif
+void print_debug(uint8_t* message, uint8_t* cyphertext, unsigned long int length_of_message) {
+    #ifdef DEBUG
+        printf("\nMessage: ");
+        print_hex(message, length_of_message);
+        printf("\n\nEncryption: ");
+        print_hex(cyphertext, length_of_message);
+    #endif
 
-//     return;
-// }
+    return;
+}
 
 void change_message(uint8_t* message, unsigned long int length_of_message, int num_err) {
     for(int i = 0; i < num_err; i++) {
@@ -237,15 +243,11 @@ void error_estimation(double result[], int NumOfExperiments, ERROR* output)
 
 int DES_test_error(unsigned long int number_of_blocks, int num_err, int user_choice, int NumOfExperiments, ERROR* DES_results) {
     srand(time(NULL));
-
     //-------------
-    uint8_t enc_buf[DES_BLOCK_SIZE];
-    // uint8_t one_block[DES_BLOCK_SIZE];
     uint8_t initialize_vector[DES_BLOCK_SIZE];
     uint8_t counter[DES_BLOCK_SIZE];
-    // uint8_t tmp_buf[DES_BLOCK_SIZE];
-    // uint8_t feedback[DES_BLOCK_SIZE];
     //------------
+
     // #ifdef MY
     //     unsigned long int number_of_blocks;
     //     int NumOfExperiments = 10;
@@ -287,7 +289,8 @@ int DES_test_error(unsigned long int number_of_blocks, int num_err, int user_cho
     // #endif
 
     for (int i = 0; i < NumOfExperiments; i++) {
-        printf("\n%sTEST #%d%s:", KBLU, i+1, KWHT);
+        printf("\n%sLOCAL_TEST #%d%s:", KBLU, i+1, KWHT);
+        printf("\n%sGLOBAL_TEST #%ld%s:", KMAG, ++sum_tests, KWHT);
         for (int j = 0; j < length_of_message; j++) {
             message[j] = rand() % 256;
         }

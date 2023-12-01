@@ -8,22 +8,22 @@
 #define BUFF_SIZE 1024
 
 //colors
-// #define KNRM  "\x1B[0m"
-// #define KRED  "\x1B[31m"
-// #define KGRN  "\x1B[32m"
-// #define KYEL  "\x1B[33m"
-// #define KBLU  "\x1B[34m"
-// #define KMAG  "\x1B[35m"
-// #define KCYN  "\x1B[36m"
-// #define KWHT  "\x1B[37m"
+#define KNRM  "\x1B[0m"
+#define KRED  "\x1B[31m"
+#define KGRN  "\x1B[32m"
+#define KYEL  "\x1B[33m"
+#define KBLU  "\x1B[34m"
+#define KMAG  "\x1B[35m"
+#define KCYN  "\x1B[36m"
+#define KWHT  "\x1B[37m"
 
 typedef unsigned char uint8_t;
 typedef unsigned int uint32_t;
 typedef unsigned long uint64_t;
 
-// typedef struct ERROR {
-//     double err_mean, err_std;
-// } ERROR;
+typedef struct ERROR {
+    double err_mean, err_std;
+} ERROR;
 
 size_t DES(uint8_t * to, uint8_t mode, uint64_t * keys48b, uint8_t * from, size_t length);
 

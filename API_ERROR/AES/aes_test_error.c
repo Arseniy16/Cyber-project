@@ -119,32 +119,6 @@ void aes_pcbc_mode(BYTE* message, unsigned long int length_of_message, BYTE* cyp
     return;
 }
 
-#if 0
-void aes_pcbc_mode(BYTE* message, unsigned long int length_of_message, BYTE* cyphertext, WORD key_schedule[], int keysize, unsigned long int number_of_blocks, BYTE* initialize_vector) {
-    BYTE one_block[AES_BLOCK_SIZE];
-    BYTE enc_buf[AES_BLOCK_SIZE];
-    BYTE feedback[AES_BLOCK_SIZE];
-    
-    memcpy(one_block, &message[0], AES_BLOCK_SIZE);
-    memcpy(feedback, one_block, AES_BLOCK_SIZE);
-    xor_of_two_blocks_AES(one_block, initialize_vector);
-    aes_encrypt(one_block, enc_buf, key_schedule, keysize);
-    memcpy(&cyphertext[0], enc_buf, AES_BLOCK_SIZE);
-    xor_of_two_blocks_AES(feedback, enc_buf);
-    
-    for (int k = 1; k < number_of_blocks; k++) {
-        memcpy(one_block, &message[k * AES_BLOCK_SIZE], AES_BLOCK_SIZE);
-        xor_of_two_blocks_AES(one_block, feedback);
-        aes_encrypt(one_block, enc_buf, key_schedule, keysize);
-        memcpy(&cyphertext[k * AES_BLOCK_SIZE], enc_buf, AES_BLOCK_SIZE);
-    }
-
-    print_debug(message, cyphertext, length_of_message);
-
-    return;
-}
-#endif
-
 void aes_cfb_mode(BYTE* message, unsigned long int length_of_message, BYTE* cyphertext, WORD key_schedule[], int keysize, unsigned long int number_of_blocks, BYTE* initialize_vector) {
     BYTE one_block[AES_BLOCK_SIZE];
     BYTE enc_buf[AES_BLOCK_SIZE];
