@@ -7,50 +7,15 @@
 
 #include "aes.h"
 
-// #define DEBUG
-// #define VERBOSE
+// // #define DEBUG
+// // #define VERBOSE
 
-#ifdef DEBUG
-    #define PRINT(str) printf("%s", str)
-#else 
-    #define PRINT(str)
-#endif 
+// #ifdef DEBUG
+//     #define PRINT(str) printf("%s", str)
+// #else 
+//     #define PRINT(str)
+// #endif 
 
-// for debug and print hex value
-void print_hex(BYTE str[], int len) {
-    int idx;
-
-    for(idx = 0; idx < len; idx++)
-        printf("%02x", str[idx]);
-
-    return;
-}
-
-void print_hex_color(BYTE str[], int len, int* arr, int cnt_error) {
-    int idx;
-    int cnt = 0;
-
-    for(idx = 0; idx < len; idx++) {
-        if ((idx == arr[cnt]) && (cnt < cnt_error)) {
-            printf("%s%02x%s", KYEL, str[idx], KWHT); 
-            cnt++;
-        }
-        else printf("%02x", str[idx]);
-    }
-
-    return;
-}
-
-void print_debug(BYTE* message, BYTE* cyphertext, unsigned long int length_of_message) {
-    #ifdef DEBUG
-        printf("\nMessage: ");
-        print_hex(message, length_of_message);
-        printf("\n\nEncryption: ");
-        print_hex(cyphertext, length_of_message);
-    #endif
-
-    return;
-}
 
 void change_message(BYTE* message, unsigned long int length_of_message, int num_err) {
     for(int i = 0; i < num_err; i++) {
@@ -129,6 +94,35 @@ void aes_pcbc_mode(BYTE* message, unsigned long int length_of_message, BYTE* cyp
     BYTE one_block[AES_BLOCK_SIZE];
     BYTE enc_buf[AES_BLOCK_SIZE];
     BYTE feedback[AES_BLOCK_SIZE];
+    BYTE tmp_buf[AES_BLOCK_SIZE];
+
+    memcpy(one_block, &message[0], AES_BLOCK_SIZE);
+    memcpy(feedback, one_block, AES_BLOCK_SIZE);
+    xor_of_two_blocks_AES(one_block, initialize_vector);
+    aes_encrypt(one_block, enc_buf, key_schedule, keysize);
+    memcpy(&cyphertext[0], enc_buf, AES_BLOCK_SIZE);
+    xor_of_two_blocks_AES(feedback, enc_buf);
+    
+    for (int k = 1; k < number_of_blocks; k++) {
+        memcpy(one_block, &message[k * AES_BLOCK_SIZE], AES_BLOCK_SIZE);
+        memcpy(tmp_buf, one_block, AES_BLOCK_SIZE);
+        xor_of_two_blocks_AES(one_block, feedback);
+        aes_encrypt(one_block, enc_buf, key_schedule, keysize);
+        memcpy(&cyphertext[k * AES_BLOCK_SIZE], enc_buf, AES_BLOCK_SIZE);
+        xor_of_two_blocks_AES(tmp_buf, enc_buf);
+        memcpy(feedback, tmp_buf, AES_BLOCK_SIZE);
+    }
+
+    print_debug(message, cyphertext, length_of_message);
+
+    return;
+}
+
+#if 0
+void aes_pcbc_mode(BYTE* message, unsigned long int length_of_message, BYTE* cyphertext, WORD key_schedule[], int keysize, unsigned long int number_of_blocks, BYTE* initialize_vector) {
+    BYTE one_block[AES_BLOCK_SIZE];
+    BYTE enc_buf[AES_BLOCK_SIZE];
+    BYTE feedback[AES_BLOCK_SIZE];
     
     memcpy(one_block, &message[0], AES_BLOCK_SIZE);
     memcpy(feedback, one_block, AES_BLOCK_SIZE);
@@ -148,6 +142,7 @@ void aes_pcbc_mode(BYTE* message, unsigned long int length_of_message, BYTE* cyp
 
     return;
 }
+#endif
 
 void aes_cfb_mode(BYTE* message, unsigned long int length_of_message, BYTE* cyphertext, WORD key_schedule[], int keysize, unsigned long int number_of_blocks, BYTE* initialize_vector) {
     BYTE one_block[AES_BLOCK_SIZE];
@@ -256,7 +251,8 @@ int AES_test_error(unsigned long int number_of_blocks, int num_err, int option_k
     BYTE enc_buf[AES_BLOCK_SIZE];
     BYTE initialize_vector[AES_BLOCK_SIZE];
     BYTE counter[AES_BLOCK_SIZE];
-    BYTE feedback[AES_BLOCK_SIZE];
+    // BYTE feedback[AES_BLOCK_SIZE];
+    // BYTE tmp_buf[AES_BLOCK_SIZE];
 
     BYTE* message = (BYTE*) calloc (length_of_message, sizeof(BYTE));
     BYTE* cyphertext = (BYTE*) calloc (length_of_message, sizeof(BYTE));
