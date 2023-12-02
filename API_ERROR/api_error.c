@@ -36,7 +36,7 @@ int file_print(char* file, double mean[][10], double std[][10]) {
 
 int main() 
 {
-    int NumOfExperiments = 10;
+    int NumOfExperiments = 1000;
     unsigned long int num_blocks = 200; // 100 - for AES, 200 - for DES
 
     int num_err[10] = {1, 2, 4, 8, 16, 32, 64, 128, 256, 512};
@@ -91,7 +91,7 @@ int main()
     // file_print("AES/logs/AES_1_encryption.txt", AES_1_encryption_mean, AES_1_encryption_std);
     // file_print("AES/logs/AES_2_encryption.txt", AES_2_encryption_mean, AES_2_encryption_std);
     // file_print("AES/logs/AES_3_encryption.txt", AES_3_encryption_mean, AES_3_encryption_std);
-    file_print("DES/logs/DES1_encryption.txt", DES_encryption_mean, DES_encryption_std);
+    file_print("DES/logs/DES_encryption.txt", DES_encryption_mean, DES_encryption_std);
 
     return 0;
 } 
